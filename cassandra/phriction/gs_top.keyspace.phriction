@@ -1,0 +1,66 @@
+= **Keyspace: gs_top** =
+Description: gs_top is the keysapce for all the tables keeping track of the most queried continents, countries and major cities
+===== Replications =====
+| **Name** | **Replication** | **Description**
+| dev | 'class': 'SimpleStrategy', 'replication_factor' : 1 | used for dev environment
+
+== Table: name_index ==
+Description: This table keeps track of all the queried continents and countries. index_key values are continents and countries.
+===== Columns =====
+| **Name** | **Type**
+| index_key | varchar
+| index_values | set<varchar>
+`Partition Keys: index_key`
+`Caching: ALL`
+
+===== Queries: =====
+
+**Query: insert**
+used to init the table's index_keys upon first run
+`INSERT INTO gs_top.name_index (index_key) VALUES (:index_key);`
+**Query: update**
+updates the index_values for an index_key
+`UPDATE gs_top.name_index SET index_values = index_values + :index_values WHERE index_key = :index_key;`
+**Query: select**
+selects an index_key's index_values
+`SELECT index_values FROM gs_top.name_index WHERE index_key = :index_key;`
+
+
+== Table: continents ==
+Description: this table keeps track of how many times each continent was queried
+===== Columns =====
+| **Name** | **Type**
+| continent | varchar
+| counter_value | counter
+`Partition Keys: continent`
+`Caching: ALL`
+
+===== Queries: =====
+
+**Query: update_counter_value**
+updates the counter_value of a continent every time it gets queried
+`UPDATE gs_top.continents SET counter_value = counter_value + 1 WHERE continent = :continent;`
+**Query: select_counter_value**
+selects a continent's counter_value
+`SELECT counter_value FROM gs_top.continents WHERE continent = :continent;`
+
+
+== Table: countries ==
+Description: this table keeps track of how many times each country was queried
+===== Columns =====
+| **Name** | **Type**
+| country | varchar
+| counter_value | counter
+`Partition Keys: country`
+`Caching: ALL`
+
+===== Queries: =====
+
+**Query: update_counter_value**
+updates the counter_value of a country every time it gets queried
+`UPDATE gs_top.countries SET counter_value = counter_value + 1 WHERE country = :country;`
+**Query: select_counter_value**
+selects a country's counter_value
+`SELECT counter_value FROM gs_top.countries WHERE country = :country;`
+
+
