@@ -21,3 +21,7 @@ hs_err_pid*
 .settings/
 .metadata/
 
+# cache
+target
+project
+logs
