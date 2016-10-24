@@ -1,4 +1,3 @@
-# Generated using ControllersGeneratorMain.java
 # Request properties
 
 # Every request-to-response operation passes by the following steps where
@@ -16,30 +15,30 @@
 # 7- analysis
 # 8- logging
 # The following properties are set to true/false to enable/disable optional
-#   steps - all values are false (disabled) by default
+#   steps - all values are true (enabled) by default
 
 # Check Source is used to check the request source for device-specific
 #   operations (e.g.: if a mobile app backend wants to reject requests coming
 #   from computers to potentially try to cause some harm)
 # Also for specific-client applications (like mobile apps) client-verification
 #   happens here (using request hashing using a secret phrase or else)
-# Default: false
-check_source=false
+# Default: true
+check_source=true
 
 # Throttle is a common need for mobile applications and websites to ban
 #   behavior like spam, DOS, etc ...
-# Default: false
-throttle=false
+# Default: true
+throttle=true
 
 # Validate param is used to validate a request (e.g.: validate e-mail format,
 #   photo size, etc ...)
-# Default: false
+# Default: true
 validate_param=true
 
 # Authenticate is used to authenticate a request (e.g.: OAuth 2,
 #   Facebook Login, etc ...)
-# Default: false
-authenticate=false
+# Default: true
+authenticate=true
 
 # NOTE: all of the following operations happen after a response is sent back
 #         for a request
@@ -47,7 +46,7 @@ authenticate=false
 # After response is used to switch on/off all after response operations
 #   (each of those operation has a switch property whose value only matters
 #   if this property's value is true)
-# Default: false
+# Default: true
 after_response=true
 
 # After processing is used to enable doing further processing for a request
@@ -57,7 +56,7 @@ after_response=true
 #   in after processing the post gets assigned to more non-friend users which
 #   if failed doesn't affect the success of the request from the
 #   user-experience point of view)
-# Default: false
+# Default: true
 after_processing=true
 
 # Default operations are used to execute operations that happen after each
@@ -65,17 +64,17 @@ after_processing=true
 #   default operations can be used to update the user's notifications'
 #   badge number; for example to reset it on the backend side since a request
 #   means that the user opened the app)
-# Default: false
-default_operations=false
+# Default: true
+default_operations=true
 
 # Notifications is used to enable sending push notifications
-# Default: false
-notifications=false
+# Default: true
+notifications=true
 
 # Analysis is used to enable doing analysis after requests
-# Default: false
-analysis=false
+# Default: true
+analysis=true
 
 # Logging is used to enable logging requests, responses, exceptions, etc ...
-# Default: false
-logging=false
+# Default: true
+logging=true
