@@ -38,14 +38,14 @@
 
 ## features
 
-| controllers | feature |
+| controller(s) | feature |
 | ---------- | ------- |
 | [reverse geo code](https://github.com/vangav/vos_geo_server/tree/master/app/com/vangav/vos_geo_server/controllers/reverse_geo_code) | transforms request's latitude and longitude into reverse geo code (continent, country, city, ...) and geo hash |
 | [top continents](https://github.com/vangav/vos_geo_server/tree/master/app/com/vangav/vos_geo_server/controllers/top_continents) and [top countries](https://github.com/vangav/vos_geo_server/tree/master/app/com/vangav/vos_geo_server/controllers/top_countries) | returns the top queried continents and countries |
 
 ## database
 
-### [NameIndex](https://github.com/vangav/vos_geo_server/blob/master/app/com/vangav/vos_geo_server/cassandra_keyspaces/gs_top/NameIndex.java)
+### [name_index](https://github.com/vangav/vos_geo_server/blob/master/app/com/vangav/vos_geo_server/cassandra_keyspaces/gs_top/NameIndex.java)
 
 + this table keeps track of all the queried continents and countries; index_key values are continents and countries
 
@@ -54,7 +54,7 @@
 | index_key | varchar |
 | index_values | set<varchar> |
 
-### [Continents](https://github.com/vangav/vos_geo_server/blob/master/app/com/vangav/vos_geo_server/cassandra_keyspaces/gs_top/Continents.java)
+### [continents](https://github.com/vangav/vos_geo_server/blob/master/app/com/vangav/vos_geo_server/cassandra_keyspaces/gs_top/Continents.java)
 
 + this table keeps track of how many times each continent was queried
 
@@ -62,6 +62,96 @@
 | ------ | ---- |
 | continent | varchar |
 | counter_value | counter |
+
+### [countries](https://github.com/vangav/vos_geo_server/blob/master/app/com/vangav/vos_geo_server/cassandra_keyspaces/gs_top/Countries.java)
+
++ this table keeps track of how many times each country was queried
+
+| column | type |
+| ------ | ---- |
+| country | varchar |
+| counter_value | counter |
+
+## api
+
+### [reverse geo code](https://github.com/vangav/vos_geo_server/tree/master/app/com/vangav/vos_geo_server/controllers/reverse_geo_code)
+
+#### brief
+
++ transforms request's latitude and longitude into reverse geo code (continent, country, city, ...) and geo hash
+
+#### request
+
+```json
+  "type": "GET",
+  "request_params": [
+    {
+      "name": "latitude",
+      "type": "LATITUDE",
+      "is_array": false,
+      "optionality": "MANDATORY"
+    },
+    {
+      "name": "longitude",
+      "type": "LONGITUDE",
+      "is_array": false,
+      "optionality": "MANDATORY"
+    }
+  ]
+```
+
+#### response
+
+```json
+  "response_type": "JSON",
+  "response_params": [
+    {
+      "name": "latitude",
+      "type": "double",
+      "is_array": false
+    },
+    {
+      "name": "longitude",
+      "type": "double",
+      "is_array": false
+    },
+    {
+      "name": "geo_hash",
+      "type": "String",
+      "is_array": false
+    },
+    {
+      "name": "city",
+      "type": "String",
+      "is_array": false
+    },
+    {
+      "name": "major_city",
+      "type": "String",
+      "is_array": false
+    },
+    {
+      "name": "country_code",
+      "type": "String",
+      "is_array": false
+    },
+    {
+      "name": "country",
+      "type": "String",
+      "is_array": false
+    },
+    {
+      "name": "continent_code",
+      "type": "String",
+      "is_array": false
+    },
+    {
+      "name": "continent",
+      "type": "String",
+      "is_array": false
+    }
+  ]
+```
 
 
 
