@@ -83,6 +83,7 @@
 #### request
 
 ```json
+  "url": "/reverse_geo_code",
   "type": "GET",
   "request_params": [
     {
@@ -150,6 +151,29 @@
       "type": "String",
       "is_array": false
     }
+  ]
+```
+
+### [top continents](https://github.com/vangav/vos_geo_server/tree/master/app/com/vangav/vos_geo_server/controllers/top_continents)
+
+#### brief
+
++ returns the top queried continents
+
+#### request
+
+```json
+  "url": "/top_continents",
+  "type": "GET",
+  "request_params": [
+  ]
+```
+
+#### response
+
+```json
+  "response_type": "JSON",
+  "response_params": [
   ]
 ```
 
