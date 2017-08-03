@@ -35,6 +35,12 @@
 + at the end to stop the service: press `control + d` in the terminal session where the service was started in (10)
 + to stop cassandra: execute `ps auwx | grep cassandra` to get cassandra's `(pid)` then `kill -9 (pid)` to stop cassandra
 
+## covered topics
+
++ generate a service with multi-entry-point api
++ generate a database
++ use the geo services utility
+
 ## features
 
 | controller(s) | feature |
