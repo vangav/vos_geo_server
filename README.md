@@ -55,15 +55,13 @@
 | [controllers](https://github.com/vangav/vos_geo_server/tree/master/app/com/vangav/vos_geo_server/controllers) | api implementation |
 | [gs_top](https://github.com/vangav/vos_geo_server/tree/master/app/com/vangav/vos_geo_server/cassandra_keyspaces/gs_top) | `gs_top` keyspace cassandra client |
 
+## change log
 
++ this section lists the 10-% code added after vangav backend generated 90+% of the code
 
-
-
-
-
-
-
-
-
-
-
+| file/dir | change |
+| -------- | ------ |
+| [conf/data](https://github.com/vangav/vos_geo_server/tree/master/conf/data/geo/reverse_geo_coding) | added reverse geo coding data from vangav backend's [data](https://github.com/vangav/vos_backend/tree/master/data) |
+| [Global.java](https://github.com/vangav/vos_geo_server/blob/master/app/Global.java) | added reverse geo coding initialization in `beforeStart` method |
+| [common](https://github.com/vangav/vos_geo_server/tree/master/app/com/vangav/vos_geo_server/common) | contains common operations like initializing the continents/countries names index |
+| [controllers](https://github.com/vangav/vos_geo_server/tree/master/app/com/vangav/vos_geo_server/controllers) | added the implementation of request processing logic under `controller_name/HandlerControllerName.java` classes and nested response json structures under `controller_name/response_json` packages |
