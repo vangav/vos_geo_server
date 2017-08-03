@@ -59,7 +59,7 @@
 | [Global.java](https://github.com/vangav/vos_geo_server/blob/master/app/Global.java#L98) | reverse geo coding initialization |
 | [common](https://github.com/vangav/vos_geo_server/tree/master/app/com/vangav/vos_geo_server/common) | handles common operations like initializing the continents/countries names index |
 | [controllers](https://github.com/vangav/vos_geo_server/tree/master/app/com/vangav/vos_geo_server/controllers) | api implementation |
-| [gs_top](https://github.com/vangav/vos_geo_server/tree/master/app/com/vangav/vos_geo_server/cassandra_keyspaces/gs_top) | `gs_top` keyspace cassandra client |
+| [gs_top](https://github.com/vangav/vos_geo_server/tree/master/app/com/vangav/vos_geo_server/cassandra_keyspaces/gs_top) | `gs_top` cassandra's keyspace client |
 
 ## change log
 
