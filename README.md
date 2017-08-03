@@ -5,15 +5,14 @@
 
 + geo server service is generated using [vangav backend](https://github.com/vangav/vos_backend)
 
-## index
-
 ## prerequisite
 
 + [vangav backend tutorials](https://github.com/vangav/vos_backend)
 
 ## functionality
 
-+ this service handles getting reverse geo code and geo hash from geo coordinates (latitude and longitude); it also offers getting top queried continents and countries
++ transforms geo coordinates (latitude and longitude) into reverse geo code and geo hash
++ it also offers getting top queried continents and countries
 
 ## overview
 
@@ -43,139 +42,18 @@
 | [reverse geo code](https://github.com/vangav/vos_geo_server/tree/master/app/com/vangav/vos_geo_server/controllers/reverse_geo_code) | transforms request's latitude and longitude into reverse geo code (continent, country, city, ...) and geo hash |
 | [top continents](https://github.com/vangav/vos_geo_server/tree/master/app/com/vangav/vos_geo_server/controllers/top_continents) and [top countries](https://github.com/vangav/vos_geo_server/tree/master/app/com/vangav/vos_geo_server/controllers/top_countries) | returns the top queried continents and countries |
 
-## database
+## service references
 
-### [name_index](https://github.com/vangav/vos_geo_server/blob/master/app/com/vangav/vos_geo_server/cassandra_keyspaces/gs_top/NameIndex.java)
-
-+ this table keeps track of all the queried continents and countries; index_key values are continents and countries
-
-| column | type |
-| ------ | ---- |
-| index_key | varchar |
-| index_values | set<varchar> |
-
-### [continents](https://github.com/vangav/vos_geo_server/blob/master/app/com/vangav/vos_geo_server/cassandra_keyspaces/gs_top/Continents.java)
-
-+ this table keeps track of how many times each continent was queried
-
-| column | type |
-| ------ | ---- |
-| continent | varchar |
-| counter_value | counter |
-
-### [countries](https://github.com/vangav/vos_geo_server/blob/master/app/com/vangav/vos_geo_server/cassandra_keyspaces/gs_top/Countries.java)
-
-+ this table keeps track of how many times each country was queried
-
-| column | type |
-| ------ | ---- |
-| country | varchar |
-| counter_value | counter |
-
-## api
-
-### [reverse geo code](https://github.com/vangav/vos_geo_server/tree/master/app/com/vangav/vos_geo_server/controllers/reverse_geo_code)
-
-#### brief
-
-+ transforms request's latitude and longitude into reverse geo code (continent, country, city, ...) and geo hash
-
-#### request
-
-```json
-  "url": "/reverse_geo_code",
-  "type": "GET",
-  "request_params": [
-    {
-      "name": "latitude",
-      "type": "LATITUDE",
-      "is_array": false,
-      "optionality": "MANDATORY"
-    },
-    {
-      "name": "longitude",
-      "type": "LONGITUDE",
-      "is_array": false,
-      "optionality": "MANDATORY"
-    }
-  ]
-```
-
-#### response
-
-```json
-  "response_type": "JSON",
-  "response_params": [
-    {
-      "name": "latitude",
-      "type": "double",
-      "is_array": false
-    },
-    {
-      "name": "longitude",
-      "type": "double",
-      "is_array": false
-    },
-    {
-      "name": "geo_hash",
-      "type": "String",
-      "is_array": false
-    },
-    {
-      "name": "city",
-      "type": "String",
-      "is_array": false
-    },
-    {
-      "name": "major_city",
-      "type": "String",
-      "is_array": false
-    },
-    {
-      "name": "country_code",
-      "type": "String",
-      "is_array": false
-    },
-    {
-      "name": "country",
-      "type": "String",
-      "is_array": false
-    },
-    {
-      "name": "continent_code",
-      "type": "String",
-      "is_array": false
-    },
-    {
-      "name": "continent",
-      "type": "String",
-      "is_array": false
-    }
-  ]
-```
-
-### [top continents](https://github.com/vangav/vos_geo_server/tree/master/app/com/vangav/vos_geo_server/controllers/top_continents)
-
-#### brief
-
-+ returns the top queried continents
-
-#### request
-
-```json
-  "url": "/top_continents",
-  "type": "GET",
-  "request_params": [
-  ]
-```
-
-#### response
-
-```json
-  "response_type": "JSON",
-  "response_params": [
-  ]
-```
+| reference | explanation |
+| --------- | ----------- |
+| [routes](https://github.com/vangav/vos_geo_server/blob/master/conf/routes) | api routes |
+| [reverse_geo_coding](https://github.com/vangav/vos_geo_server/tree/master/conf/data/geo/reverse_geo_coding) | reverse geo coding data |
+| [controllers.json](https://github.com/vangav/vos_geo_server/blob/master/generator_config/controllers.json) | api request/response's elements |
+| [gs_top.keyspace](https://github.com/vangav/vos_geo_server/blob/master/generator_config/gs_top.keyspace) | `gs_top` is the keysapce for all the tables keeping track of the most queried continents and countries |
+| [Global.java](https://github.com/vangav/vos_geo_server/blob/master/app/Global.java#L98) | reverse geo coding initialization |
+| [common](https://github.com/vangav/vos_geo_server/tree/master/app/com/vangav/vos_geo_server/common) | handles common operations like initializing the continents/countries names index |
+| [controllers](https://github.com/vangav/vos_geo_server/tree/master/app/com/vangav/vos_geo_server/controllers) | api implementation |
+| [gs_top](https://github.com/vangav/vos_geo_server/tree/master/app/com/vangav/vos_geo_server/cassandra_keyspaces/gs_top) | `gs_top` keyspace cassandra client |
 
 
 
